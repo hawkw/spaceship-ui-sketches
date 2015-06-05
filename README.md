@@ -1,5 +1,7 @@
 # Spaceship UI sketches
 
+[![Build Status](https://travis-ci.org/hawkw/spaceship-ui-sketches.svg?branch=master)](https://travis-ci.org/hawkw/spaceship-ui-sketches)
+
 Misc flailing around with ideas for what the player-facing user interfaces in REDACTED might look like.
 
 ## Usage
