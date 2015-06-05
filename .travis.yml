@@ -2,6 +2,7 @@ language: clojure
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
+script: lein compile
 before_deploy:
   - lein uberjar
   - export RELEASE_PKG_FILE=$(ls target/*-standalone.jar)
