@@ -1,0 +1,14 @@
+language: clojure
+before_deploy:
+  - lein uberjar
+  - export RELEASE_PKG_FILE=$(ls target/*-standalone.jar)
+  - echo "deploying $RELEASE_PKG_FILE to GitHub releases"
+deploy:
+  provider: releases
+  api_key:
+    secure: VXWe7q4vi+xy2nM84yfkRmd0RcperqrlhOcFFv10DrvwCRRzZTV783nZXZHMwaWSPd2GxGU0pLj1ZFzHAJ3MFtWi80GzOASgh/nC1pECD14+dsFks+zYEQgDztIvMNpXT+CqoC/91Ge9Z+KfFXCPp8mv4UmYQQKGHoebtyf3/YkxlS/aD31R7uTo1EKEJXFR5iZiGJcVTc8POQ9f4bSbHftUnllo6lyp72oEtxCsvbxa+eKT0z4DX1POfj6l/Ak9+Lxfvib5ukvSp+pV6/JAzzIwwpGOILNuSflgwGVruSRaFhi2u58ODKbd10xyQeO3kVCjQzfyWe3pTVo2WsyqZl6EJMhHhs3kf/D6i81aSpL7rWHPDd+CPWB5RnSN1j9fThVbq9K4zV5SfgHy+cUcOVyCsNXtbUJcEnXqIY0ffW5DDsjLl4vEWdK9Ncc4yiE2pc+6bBv6CI8a9TlX5hi2wDS2sgYJL2A+YVDLD0AKBaYlKCTsBMvm96zTQRLHwFRavxCwrsGbpM/5+p9C0/7H9xmp+P1taN5MB8NTbTvAywnqRyzSHKUU642GgTCTWK7YCnlW+qwafrdxJbx1Q2zyCQ3XiM0bQoyUohMgK6apP/rlVLGXzhKVwaDwWEIMQzL1mHiP8Hne0wpIiTWN0jN7zs1v0hnXvNcCgezommfE9oY=
+  file_glob: true
+  file: "${RELEASE_PKG_FILE}"
+  on:
+    tags: true
+    repo: hawkw/spaceship-ui-sketches
