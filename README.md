@@ -1,6 +1,9 @@
 # Spaceship UI sketches
 
-Misc flailing around with ideas for what the player-facing user interfaces in REDACTED might look like.
+[![Build Status](https://travis-ci.org/hawkw/spaceship-ui-sketches.svg?branch=master)](https://travis-ci.org/hawkw/spaceship-ui-sketches)
+[![GitHub release](https://img.shields.io/github/release/hawkw/spaceship-ui-sketches.svg)]()
+
+Misc flailing around with ideas for what the player-facing user interfaces in REDACTED might look like. This is also an attempt to get more practice programming in Clojure.
 
 ## Usage
 
