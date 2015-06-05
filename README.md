@@ -1,6 +1,6 @@
-# tsg-ui
+# Spaceship UI sketches
 
-A Quil sketch designed to ... well, that part is up to you.
+Misc flailing around with ideas for what the player-facing user interfaces in REDACTED might look like.
 
 ## Usage
 
@@ -12,7 +12,4 @@ REPL - run `(require 'tsg-ui.core)`.
 
 ## License
 
-Copyright © 2014 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Copyright © 2014 MeteorCode Laboratories
