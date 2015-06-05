@@ -1,4 +1,5 @@
 language: clojure
+script: lein compile
 before_deploy:
   - lein uberjar
   - export RELEASE_PKG_FILE=$(ls target/*-standalone.jar)
