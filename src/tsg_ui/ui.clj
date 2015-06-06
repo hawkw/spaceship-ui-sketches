@@ -11,26 +11,30 @@
 (def red [255 0 0])
 
 (defn setup []
-  ; Set frame rate to 30 frames per second.
-  (q/frame-rate 30)
-  (q/color-mode :rgb)
-  ; setup function returns initial state. It contains
-  ; circle color and position.
-  (q/text-size 10)
-  {:labelfont (q/create-font "HelveticaNeue-CondensedBlack" 10 true)
-   :colors [ [green 1] [green 1] [green 1] [green 1]
-             [green 1] [green 1] [green 1] [green 1] ] })
+    ; Set frame rate to 30 frames per second.
+    (q/frame-rate 30)
+    (q/color-mode :rgb)
+    ; setup function returns initial state. It contains
+    ; circle color and position.
+    (q/text-size 10)
+    {:labelfont (q/create-font "HelveticaNeue-CondensedBlack" 10 true)
+     :colors [ [green 1] [green 1] [green 1] [green 1]
+               [green 1] [green 1] [green 1] [green 1] ]
+     :fault (q/request-image "fault.png")
+    })
 
 (defn gencolor [[color age]]
     (if (and
             (== 0 (mod age 15)) ; enough framps have passed since last color swap
-            (= 3 (rand-int 4)))          ; random chance to swap
+            (= 3 (rand-int 4))  ; random chance to swap
+            )
         (if (= [0 255 0] color) [[255 255 0] 1] [[0 255 0] 1])
         [color (+ 1 age)])
     )
 
 (defn update-state [state]
-    (-> state (assoc :colors (doall (map gencolor (:colors state))) )
+    (-> state
+        (assoc :colors (doall (map gencolor (:colors state))) )
     )
 )
 
@@ -53,5 +57,6 @@
     (doseq [[x y text] grid]
         (q/text-font (:labelfont state))
         (q/text text x y)
-     )
-  )
+    )
+    (q/image (:fault state) 145 5 63 28) ; these just happen to be the dimensions of Soren's FAULT light
+)
