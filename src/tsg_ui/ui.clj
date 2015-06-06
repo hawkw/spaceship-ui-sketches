@@ -77,10 +77,7 @@
         (q/text text x y)
     )
     (if (:fault-flag state)
-        (
-            (q/tint red)
-            (q/image (:fault-img state) 145 5)
-        )
+        (q/image (:fault-img state) 145 5)
         ()
     )
 )
