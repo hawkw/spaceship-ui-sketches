@@ -7,8 +7,9 @@
     ]
 )
 
-(def green [0 255 0])
-(def red [255 0 0])
+(def green  [0 255 0] )
+(def yellow [255 255 0] )
+(def red    [255 0 0] )
 
 (defn setup []
     ; Set frame rate to 30 frames per second.
@@ -20,21 +21,37 @@
     {:labelfont (q/create-font "HelveticaNeue-CondensedBlack" 10 true)
      :colors [ [green 1] [green 1] [green 1] [green 1]
                [green 1] [green 1] [green 1] [green 1] ]
-     :fault (q/request-image "fault.png")
+     :fault-img (q/load-image "fault.png")
+     :fault-flag false
     })
 
-(defn gencolor [[color age]]
+(defn gencolor [newcolor [color age]]
     (if (and
             (== 0 (mod age 15)) ; enough framps have passed since last color swap
             (= 3 (rand-int 4))  ; random chance to swap
             )
-        (if (= [0 255 0] color) [[255 255 0] 1] [[0 255 0] 1])
+        (if (= green color) [newcolor 1] [green 1])
         [color (+ 1 age)])
     )
 
 (defn update-state [state]
     (-> state
-        (assoc :colors (doall (map gencolor (:colors state))) )
+        (assoc :colors
+            (doall
+                (map (partial gencolor (if (:fault-flag state) red yellow) )
+                     (:colors state)
+                )
+            )
+        )
+        (assoc :fault-flag
+            (or
+                (:fault-flag state)
+                (and
+                    (< 300 (q/frame-count)) ; run normally for about 10sec before faulting
+                    (= 50 (rand-int 51))    ; random chance to fault
+                )
+            )
+        )
     )
 )
 
@@ -50,6 +67,7 @@
         [ [x y text][[r g b] age] ]
         (map vector grid (:colors state))
             ]
+        ;(print rgb)
         (q/fill r g b)
         (q/rect x y 15 15)
     )
@@ -58,5 +76,11 @@
         (q/text-font (:labelfont state))
         (q/text text x y)
     )
-    (q/image (:fault state) 145 5 63 28) ; these just happen to be the dimensions of Soren's FAULT light
+    (if (:fault-flag state)
+        (
+            (q/tint red)
+            (q/image (:fault-img state) 145 5)
+        )
+        ()
+    )
 )
