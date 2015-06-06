@@ -36,13 +36,6 @@
 
 (defn update-state [state]
     (-> state
-        (assoc :colors
-            (doall
-                (map (partial gencolor (if (:fault-flag state) red yellow) )
-                     (:colors state)
-                )
-            )
-        )
         (assoc :fault-flag
             (or
                 (:fault-flag state)
@@ -52,6 +45,14 @@
                 )
             )
         )
+        (assoc :colors
+            (doall
+                (map (partial gencolor (if (:fault-flag state) red yellow) )
+                     (:colors state)
+                )
+            )
+        )
+
     )
 )
 
