@@ -19,7 +19,7 @@
     ; circle color and position.
     (q/text-mode :shape)
     (q/text-size 10)
-    {:labelfont (q/create-font "Menlo" 10 true)
+    {:labelfont (q/create-font "Monaco" 10 false)
      :colors [ [green 1] [green 1] [green 1] [green 1]
                [green 1] [green 1] [green 1] [green 1] ]
      :fault-img (q/load-image "fault.png")
@@ -64,7 +64,7 @@
     (q/rect x y 12 12)
     (q/no-fill)
     (q/stroke 255)
-    (q/rect x y 15 15)
+    (q/rect x y 14 14)
     )
 
 (defn draw-state [state]
