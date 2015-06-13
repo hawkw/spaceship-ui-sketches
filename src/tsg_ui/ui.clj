@@ -18,7 +18,7 @@
     ; setup function returns initial state. It contains
     ; circle color and position.
     (q/text-size 10)
-    {:labelfont (q/create-font "HelveticaNeue-CondensedBlack" 10 true)
+    {:labelfont (q/create-font "Menlo" 10 true)
      :colors [ [green 1] [green 1] [green 1] [green 1]
                [green 1] [green 1] [green 1] [green 1] ]
      :fault-img (q/load-image "fault.png")
@@ -56,6 +56,17 @@
     )
 )
 
+(defn bl-dist [n] (+ 5 (/ 2 n)))
+
+(defn blinkenlight [ [x y] [r g b] age]
+    (q/fill r g b)
+    (q/no-stroke)
+    (q/rect x y 12 12)
+    (q/no-fill)
+    (q/stroke 255)
+    (q/rect x y 15 15)
+    )
+
 (defn draw-state [state]
     ; Clear the sketch by filling it with black
     (q/background 0)
@@ -68,9 +79,7 @@
         [ [x y text][[r g b] age] ]
         (map vector grid (:colors state))
             ]
-        ;(print rgb)
-        (q/fill r g b)
-        (q/rect x y 15 15)
+        (blinkenlight [x y] [r g b] age)
     )
     (q/fill 0)
     (doseq [[x y text] grid]
