@@ -3,7 +3,7 @@
 
 (def grid [
     [20 20 "NUC"] [55 20 "JET"] [90 20 "RCS"] [125 20 "JMP"]
-    [20 55 "PLC"] [55 55 "NAV"] [90 55 "COM"] [125 55 "BIO"]
+    [20 65 "PLC"] [55 65 "NAV"] [90 65 "COM"] [125 65 "BIO"]
     ]
 )
 
@@ -17,6 +17,7 @@
     (q/color-mode :rgb)
     ; setup function returns initial state. It contains
     ; circle color and position.
+    (q/text-mode :shape)
     (q/text-size 10)
     {:labelfont (q/create-font "Menlo" 10 true)
      :colors [ [green 1] [green 1] [green 1] [green 1]
@@ -27,9 +28,8 @@
 
 (defn gencolor [newcolor [color age]]
     (if (and
-            (== 0 (mod age 15)) ; enough framps have passed since last color swap
-            (= 3 (rand-int 4))  ; random chance to swap
-            )
+            (== 0 (mod age 15))  ; enough framps have passed since last color swap
+            (= 3 (rand-int 4)) ) ; random chance to swap
         (if (= green color) [newcolor 1] [green 1])
         [color (+ 1 age)])
     )
@@ -81,10 +81,10 @@
             ]
         (blinkenlight [x y] [r g b] age)
     )
-    (q/fill 0)
+    (q/fill 255)
     (doseq [[x y text] grid]
         (q/text-font (:labelfont state))
-        (q/text text x y)
+        (q/text text x (+ y 20))
     )
     (if (:fault-flag state)
         (q/image (:fault-img state) 145 5)
